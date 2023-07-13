@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Admin | Add Schedule</title>
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+			crossorigin="anonymous"
+		/>
+	</head>
+	<body>
+		<!-- NAVBAR START -->
+		<nav class="navbar navbar-expand-lg bg-body-tertiary">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="/api/admin">Admin</a>
+				<button
+					class="navbar-toggler"
+					type="button"
+					data-bs-toggle="collapse"
+					data-bs-target="#navbarNav"
+					aria-controls="navbarNav"
+					aria-expanded="false"
+					aria-label="Toggle navigation"
+				>
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav">
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="/api/admin/">Home</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="/api/admin/get/all">All Tour</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<!-- NAVBAR END -->
+		<!-- HERO START -->
+		<div class="container border mt-3">
+			<h1 class="display-3 mb-3"><u>Add Schedule</u></h1>
+			<form class="row g-3" action="/api/admin/add/schedule/<%=tourID %>" method="post">
+				<div class="row mt-3">
+					<div class="col-auto">
+						<label class="visually-hidden" for="autoSizingInput">Day Number</label>
+						<input type="number" class="form-control" name="day" id="autoSizingInput" placeholder="Day Number" />
+					</div>
+					<div class="col-auto">
+						<label class="visually-hidden" for="autoSizingInput">Hour</label>
+						<input type="number" class="form-control" name="hour" id="autoSizingInput" placeholder="Enter Day Hour" />
+					</div>
+					<div class="col-auto">
+						<label class="visually-hidden" for="autoSizingInput">Minutes</label>
+						<input type="number" class="form-control" name="minute" id="autoSizingInput" placeholder="Enter minutes" />
+					</div>
+				</div>
+				<div class="d-flex">
+					<div class="container englishData border m-2">
+						<h1>English Data</h1>
+						<hr />
+						<div class="col-12 mb-2">
+							<input type="text" name="titleEn" class="form-control" id="titleEn" placeholder="Activity Title" />
+						</div>
+						<br />
+						<div class="form-floating">
+							<textarea
+								style="height: 200px"
+								class="form-control"
+								placeholder="Activity Description"
+								id="floatingTextarea"
+								name="descriptionEn"
+							></textarea>
+							<label for="floatingTextarea">Description</label>
+						</div>
+						<br />
+					</div>
+					<!--  -->
+					<div class="container arabicData border m-2">
+						<h1>البيانات العربية</h1>
+						<hr />
+						<div class="col-12 mb-2">
+							<input type="text" name="titleAr" class="form-control" id="titleEn" placeholder="عنوان النشاط" />
+						</div>
+						<br />
+						<div class="form-floating">
+							<textarea
+								style="height: 200px"
+								class="form-control"
+								placeholder="وصف النشاط"
+								id="floatingTextarea"
+								name="descriptionAr"
+							></textarea>
+							<label for="floatingTextarea">وصف</label>
+						</div>
+					</div>
+				</div>
+				<button type="submit">Add Schedule</button>
+			</form>
+		</div>
+		<br />
+		<br />
+		<br />
+		<br />
+		<!-- HERO END -->
+		<!-- SHOW ALL SCHEDULE START-->
+		<div class="container border mt-3">
+			<h1 class="display-3 mb-3"><u>Current Schedule</u></h1>
+			<div class="d-flex">
+				<div class="container englishData border m-2">
+					<% for(let day=0; day<schedule.enSchedule.length; day++) {%>
+						<h3 class="mb-3">Day <%= (day+1) %> </h3>
+						<% for(let act=0; act<schedule.enSchedule[day].length; act++) {%>
+						<div class="card mb-3">
+							<div class="card-body">
+								<h5 class="card-title"><%= schedule.enSchedule[day][act].activityTitle %></h5>
+								<h6 class="card-subtitle mb-2 text-muted"><%= schedule.enSchedule[day][act].hour %>:<%= schedule.enSchedule[day][act].minute %></h6>
+								<p class="card-text lead"><%= schedule.enSchedule[day][act].activityDescription %></p>
+							</div>
+						</div>
+						<% } %>
+					<% } %>
+				</div>
+				<!--  -->
+				<!-- <div class="container arabicData border m-2">
+					<h1>الجدول العربي</h1>
+					<hr />
+					<h3>يوم 1</h3>
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title">Breakfast</h5>
+							<h6 class="card-subtitle mb-2 text-muted">8:30</h6>
+							<p class="card-text">Healthy and Tasty breakfast</p>
+						</div>
+					</div>
+				</div> -->
+			</div>
+		</div>
+		<br />
+		<br />
+		<br />
+		<br />
+		<!-- SHOW ALL SCHEDULE END-->
+
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+			crossorigin="anonymous"
+		></script>
+	</body>
+</html>

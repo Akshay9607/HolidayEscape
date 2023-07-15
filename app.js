@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 const corsOptions = {
-	origin: 'https://holidayescape.netlify.app/',
+	origin: 'https://holidayescape.netlify.app',
 	credentials: true, //access-control-allow-credentials:true
 	optionSuccessStatus: 200,
 };
